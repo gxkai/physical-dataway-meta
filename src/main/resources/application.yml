@@ -1,0 +1,76 @@
+server:
+  port: 10204
+
+spring:
+  application:
+    name: physical-dataway-meta
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    deserialization:
+      #允许对象忽略json中不存在的属性
+      fail_on_unknown_properties: false
+
+
+  datasource:
+    　　type: com.alibaba.druid.pool.DruidDataSource   #配置当前要使用的数据源的操作类型那个
+    　　driver-class-name: com.mysql.jdbc.Driver       #配置MySQL的驱动程序类
+    　　url: jdbc:mysql://101.37.202.3:3306/d_cloud?useUnicode=true&characterEncoding=utf8
+    　　username: root
+    　　password: Mysql12#
+    　　filters: stat,wall,log4j     #druid监控配置
+    　　dbcp2:
+      　　min-idle: 5         #数据库连接池的最小维持连接数
+      　　initial-size: 5     #初始化提供的连接数
+      　　max-total: 5          #最大的连接数
+      　　max-wait-millis: 200        #等待连接获取的最大超时时间
+
+# 启用 Dataway 功能（默认不启用）
+HASOR_DATAQL_DATAWAY: true
+  # 开启 ui 管理功能（注意生产环境必须要设置为 false，否则会造成严重的生产安全事故）
+HASOR_DATAQL_DATAWAY_ADMIN: true
+  # （可选）API工作路径
+HASOR_DATAQL_DATAWAY_API_URL: /api/
+  # （可选）ui 的工作路径，只有开启 ui 管理功能后才有效
+HASOR_DATAQL_DATAWAY_UI_URL: /interface-ui/
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+#这样才能访问 /actuator/bus-refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+
