@@ -8,31 +8,33 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     deserialization:
-      #ÔÊĞí¶ÔÏóºöÂÔjsonÖĞ²»´æÔÚµÄÊôĞÔ
+      #å…è®¸å¯¹è±¡å¿½ç•¥jsonä¸­ä¸å­˜åœ¨çš„å±æ€§
       fail_on_unknown_properties: false
 
 
   datasource:
-    ¡¡¡¡type: com.alibaba.druid.pool.DruidDataSource   #ÅäÖÃµ±Ç°ÒªÊ¹ÓÃµÄÊı¾İÔ´µÄ²Ù×÷ÀàĞÍÄÇ¸ö
-    ¡¡¡¡driver-class-name: com.mysql.jdbc.Driver       #ÅäÖÃMySQLµÄÇı¶¯³ÌĞòÀà
-    ¡¡¡¡url: jdbc:mysql://101.37.202.3:3306/d_cloud?useUnicode=true&characterEncoding=utf8
-    ¡¡¡¡username: root
-    ¡¡¡¡password: Mysql12#
-    ¡¡¡¡filters: stat,wall,log4j     #druid¼à¿ØÅäÖÃ
-    ¡¡¡¡dbcp2:
-      ¡¡¡¡min-idle: 5         #Êı¾İ¿âÁ¬½Ó³ØµÄ×îĞ¡Î¬³ÖÁ¬½ÓÊı
-      ¡¡¡¡initial-size: 5     #³õÊ¼»¯Ìá¹©µÄÁ¬½ÓÊı
-      ¡¡¡¡max-total: 5          #×î´óµÄÁ¬½ÓÊı
-      ¡¡¡¡max-wait-millis: 200        #µÈ´ıÁ¬½Ó»ñÈ¡µÄ×î´ó³¬Ê±Ê±¼ä
+    ã€€ã€€type: com.alibaba.druid.pool.DruidDataSource   #é…ç½®å½“å‰è¦ä½¿ç”¨çš„æ•°æ®æºçš„æ“ä½œç±»å‹é‚£ä¸ª
+    ã€€ã€€driver-class-name: com.mysql.jdbc.Driver       #é…ç½®MySQLçš„é©±åŠ¨ç¨‹åºç±»
+    ã€€ã€€url: jdbc:mysql://101.37.202.3:3306/d_cloud?useUnicode=true&characterEncoding=utf8
+    ã€€ã€€username: root
+    ã€€ã€€password: Mysql12#
+    ã€€ã€€filters: stat,wall,log4j     #druidç›‘æ§é…ç½®
+    ã€€ã€€dbcp2:
+      ã€€ã€€min-idle: 5         #æ•°æ®åº“è¿æ¥æ± çš„æœ€å°ç»´æŒè¿æ¥æ•°
+      ã€€ã€€initial-size: 5     #åˆå§‹åŒ–æä¾›çš„è¿æ¥æ•°
+      ã€€ã€€max-total: 5          #æœ€å¤§çš„è¿æ¥æ•°
+      ã€€ã€€max-wait-millis: 200        #ç­‰å¾…è¿æ¥è·å–çš„æœ€å¤§è¶…æ—¶æ—¶é—´
 
-# ÆôÓÃ Dataway ¹¦ÄÜ£¨Ä¬ÈÏ²»ÆôÓÃ£©
+  # æ˜¯å¦å¯ç”¨ Dataway åŠŸèƒ½ï¼ˆå¿…é€‰ï¼šé»˜è®¤falseï¼‰
 HASOR_DATAQL_DATAWAY: true
-  # ¿ªÆô ui ¹ÜÀí¹¦ÄÜ£¨×¢ÒâÉú²ú»·¾³±ØĞëÒªÉèÖÃÎª false£¬·ñÔò»áÔì³ÉÑÏÖØµÄÉú²ú°²È«ÊÂ¹Ê£©
+  # æ˜¯å¦å¼€å¯ Dataway åå°ç®¡ç†ç•Œé¢ï¼ˆå¿…é€‰ï¼šé»˜è®¤falseï¼‰
 HASOR_DATAQL_DATAWAY_ADMIN: true
-  # £¨¿ÉÑ¡£©API¹¤×÷Â·¾¶
+  # dataway APIå·¥ä½œè·¯å¾„ï¼ˆå¯é€‰ï¼Œé»˜è®¤ï¼š/api/ï¼‰
 HASOR_DATAQL_DATAWAY_API_URL: /api/
-  # £¨¿ÉÑ¡£©ui µÄ¹¤×÷Â·¾¶£¬Ö»ÓĞ¿ªÆô ui ¹ÜÀí¹¦ÄÜºó²ÅÓĞĞ§
+  # dataway-ui çš„å·¥ä½œè·¯å¾„ï¼ˆå¯é€‰ï¼Œé»˜è®¤ï¼š/interface-ui/ï¼‰
 HASOR_DATAQL_DATAWAY_UI_URL: /interface-ui/
+  # SQLæ‰§è¡Œå™¨æ–¹è¨€è®¾ç½®ï¼ˆå¯é€‰ï¼Œå»ºè®®è®¾ç½®ï¼‰
+HASOR_DATAQL_FX_PAGE_DIALECT: mysql
 
 feign:
   httpclient:
@@ -54,9 +56,9 @@ ribbon:
 hystrix:
   threadpool:
     default:
-      coreSize: 1000 #²¢·¢Ö´ĞĞµÄ×î´óÏß³ÌÊı£¬Ä¬ÈÏ10
-      maxQueueSize: 1000 #BlockingQueueµÄ×î´ó¶ÓÁĞÊı
-      queueSizeRejectionThreshold: 500 #¼´Ê¹maxQueueSizeÃ»ÓĞ´ïµ½£¬´ïµ½queueSizeRejectionThreshold¸ÃÖµºó£¬ÇëÇóÒ²»á±»¾Ü¾ø
+      coreSize: 1000 #å¹¶å‘æ‰§è¡Œçš„æœ€å¤§çº¿ç¨‹æ•°ï¼Œé»˜è®¤10
+      maxQueueSize: 1000 #BlockingQueueçš„æœ€å¤§é˜Ÿåˆ—æ•°
+      queueSizeRejectionThreshold: 500 #å³ä½¿maxQueueSizeæ²¡æœ‰è¾¾åˆ°ï¼Œè¾¾åˆ°queueSizeRejectionThresholdè¯¥å€¼åï¼Œè¯·æ±‚ä¹Ÿä¼šè¢«æ‹’ç»
   command:
     default:
       execution:
@@ -64,7 +66,7 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000
 
-#ÕâÑù²ÅÄÜ·ÃÎÊ /actuator/bus-refresh
+#è¿™æ ·æ‰èƒ½è®¿é—® /actuator/bus-refresh
 management:
   endpoints:
     web:
@@ -73,4 +75,3 @@ management:
       cors:
         allowed-origins: "*"
         allowed-methods: "*"
-
